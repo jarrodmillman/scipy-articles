@@ -1,0 +1,620 @@
+\newpage
+\section*{SciPy 1.0 released!}
+
+\begin{verbatim}
+Hi all,
+
+We are extremely pleased to announce the release of SciPy 1.0, 16 years
+after
+version 0.1 saw the light of day.  It has been a long, productive journey to
+get here, and we anticipate many more exciting new features and releases in
+the
+future.
+
+
+Why 1.0 now?
+------------
+
+A version number should reflect the maturity of a project - and SciPy was a
+mature and stable library that is heavily used in production settings for a
+long time already.  From that perspective, the 1.0 version number is long
+overdue.
+
+Some key project goals, both technical (e.g. Windows wheels and continuous
+integration) and organisational (a governance structure, code of conduct
+and a
+roadmap), have been achieved recently.
+
+Many of us are a bit perfectionist, and therefore are reluctant to call
+something "1.0" because it may imply that it's "finished" or "we are 100%
+happy
+with it".  This is normal for many open source projects, however that
+doesn't
+make it right.  We acknowledge to ourselves that it's not perfect, and there
+are some dusty corners left (that will probably always be the case).
+Despite
+that, SciPy is extremely useful to its users, on average has high quality
+code
+and documentation, and gives the stability and backwards compatibility
+guarantees that a 1.0 label imply.
+
+
+Some history and perspectives
+-----------------------------
+
+- 2001: the first SciPy release
+- 2005: transition to NumPy
+- 2007: creation of scikits
+- 2008: scipy.spatial module and first Cython code added
+- 2010: moving to a 6-monthly release cycle
+- 2011: SciPy development moves to GitHub
+- 2011: Python 3 support
+- 2012: adding a sparse graph module and unified optimization interface
+- 2012: removal of scipy.maxentropy
+- 2013: continuous integration with TravisCI
+- 2015: adding Cython interface for BLAS/LAPACK and a benchmark suite
+- 2017: adding a unified C API with scipy.LowLevelCallable; removal of
+scipy.weave
+- 2017: SciPy 1.0 release
+
+
+**Pauli Virtanen** is SciPy's Benevolent Dictator For Life (BDFL).  He says:
+
+*Truthfully speaking, we could have released a SciPy 1.0 a long time ago,
+so I'm
+happy we do it now at long last. The project has a long history, and during
+the
+years it has matured also as a software project.  I believe it has well
+proved
+its merit to warrant a version number starting with unity.*
+
+*Since its conception 15+ years ago, SciPy has largely been written by and
+for
+scientists, to provide a box of basic tools that they need. Over time, the
+set
+of people active in its development has undergone some rotation, and we have
+evolved towards a somewhat more systematic approach to development.
+Regardless,
+this underlying drive has stayed the same, and I think it will also continue
+propelling the project forward in future. This is all good, since not long
+after 1.0 comes 1.1.*
+
+**Travis Oliphant** is one of SciPy's creators.  He says:
+
+*I'm honored to write a note of congratulations to the SciPy developers and
+the
+entire SciPy community for the release of SciPy 1.0.   This release
+represents
+a dream of many that has been patiently pursued by a stalwart group of
+pioneers
+for nearly 2 decades.   Efforts have been broad and consistent over that
+time
+from many hundreds of people.   From initial discussions to efforts coding
+and
+packaging to documentation efforts to extensive conference and community
+building, the SciPy effort has been a global phenomenon that it has been a
+privilege to participate in.*
+
+*The idea of SciPy was already in multiple people’s minds in 1997 when I
+first
+joined the Python community as a young graduate student who had just fallen
+in
+love with the expressibility and extensibility of Python.   The internet was
+just starting to bringing together like-minded mathematicians and
+scientists in
+nascent electronically-connected communities.   In 1998, there was a
+concerted
+discussion on the matrix-SIG, python mailing list with people like Paul
+Barrett, Joe Harrington, Perry Greenfield, Paul Dubois, Konrad Hinsen, David
+Ascher, and others.   This discussion encouraged me in 1998 and 1999 to
+procrastinate my PhD and spend a lot of time writing extension modules to
+Python that mostly wrapped battle-tested Fortran and C-code making it
+available
+to the Python user.   This work attracted the help of others like Robert
+Kern,
+Pearu Peterson and Eric Jones who joined their efforts with mine in 2000 so
+that by 2001, the first SciPy release was ready.   This was long before
+Github
+simplified collaboration and input from others and the "patch" command and
+email was how you helped a project improve.*
+
+*Since that time, hundreds of people have spent an enormous amount of time
+improving the SciPy library and the community surrounding this library has
+dramatically grown. I stopped being able to participate actively in
+developing
+the SciPy library around 2010.  Fortunately, at that time, Pauli Virtanen
+and
+Ralf Gommers picked up the pace of development supported by dozens of other
+key
+contributors such as David Cournapeau, Evgeni Burovski, Josef Perktold, and
+Warren Weckesser.   While I have only been able to admire the development of
+SciPy from a distance for the past 7 years, I have never lost my love of the
+project and the concept of community-driven development.    I remain driven
+even now by a desire to help sustain the development of not only the SciPy
+library but many other affiliated and related open-source projects.  I am
+extremely pleased that SciPy is in the hands of a world-wide community of
+talented developers who will ensure that SciPy remains an example of how
+grass-roots, community-driven development can succeed.*
+
+**Fernando Perez** offers a wider community perspective:
+
+*The existence of a nascent Scipy library, and the incredible --if tiny by
+today's standards-- community surrounding it is what drew me into the
+scientific Python world while still a physics graduate student in 2001.
+Today,
+I am awed when I see these tools power everything from high school
+education to
+the research that led to the 2017 Nobel Prize in physics.*
+
+*Don't be fooled by the 1.0 number: this project is a mature cornerstone of
+the
+modern scientific computing ecosystem.  I am grateful for the many who have
+made it possible, and hope to be able to contribute again to it in the
+future.
+My sincere congratulations to the whole team!*
+
+
+Highlights of this release
+--------------------------
+
+Some of the highlights of this release are:
+
+- Major build improvements.  Windows wheels are available on PyPI for the
+  first time, and continuous integration has been set up on Windows and OS X
+  in addition to Linux.
+- A set of new ODE solvers and a unified interface to them
+  (`scipy.integrate.solve_ivp`).
+- Two new trust region optimizers and a new linear programming method, with
+  improved performance compared to what `scipy.optimize` offered previously.
+- Many new BLAS and LAPACK functions were wrapped.  The BLAS wrappers are
+now
+  complete.
+
+
+Upgrading and compatibility
+---------------------------
+
+There have been a number of deprecations and API changes in this release,
+which
+are documented below.  Before upgrading, we recommend that users check that
+their own code does not use deprecated SciPy functionality (to do so, run
+your
+code with ``python -Wd`` and check for ``DeprecationWarning`` s).
+
+This release requires Python 2.7 or >=3.4 and NumPy 1.8.2 or greater.
+
+This is also the last release to support LAPACK 3.1.x - 3.3.x.  Moving the
+lowest supported LAPACK version to >3.2.x was long blocked by Apple
+Accelerate
+providing the LAPACK 3.2.1 API.  We have decided that it's time to either
+drop
+Accelerate or, if there is enough interest, provide shims for functions
+added
+in more recent LAPACK versions so it can still be used.
+
+
+New features
+============
+
+`scipy.cluster` improvements
+----------------------------
+
+`scipy.cluster.hierarchy.optimal_leaf_ordering`, a function to reorder a
+linkage matrix to minimize distances between adjacent leaves, was added.
+
+
+`scipy.fftpack` improvements
+----------------------------
+
+N-dimensional versions of the discrete sine and cosine transforms and their
+inverses were added as ``dctn``, ``idctn``, ``dstn`` and ``idstn``.
+
+
+`scipy.integrate` improvements
+------------------------------
+
+A set of new ODE solvers have been added to `scipy.integrate`.  The
+convenience
+function `scipy.integrate.solve_ivp` allows uniform access to all solvers.
+The individual solvers (``RK23``, ``RK45``, ``Radau``, ``BDF`` and
+``LSODA``)
+can also be used directly.
+
+
+`scipy.linalg` improvements
+----------------------------
+
+The BLAS wrappers in `scipy.linalg.blas` have been completed.  Added
+functions
+are ``*gbmv``, ``*hbmv``, ``*hpmv``, ``*hpr``, ``*hpr2``, ``*spmv``,
+``*spr``,
+``*tbmv``, ``*tbsv``, ``*tpmv``, ``*tpsv``, ``*trsm``, ``*trsv``, ``*sbmv``,
+``*spr2``,
+
+Wrappers for the LAPACK functions ``*gels``, ``*stev``, ``*sytrd``,
+``*hetrd``,
+``*sytf2``, ``*hetrf``, ``*sytrf``, ``*sycon``, ``*hecon``, ``*gglse``,
+``*stebz``, ``*stemr``, ``*sterf``, and ``*stein`` have been added.
+
+The function `scipy.linalg.subspace_angles` has been added to compute the
+subspace angles between two matrices.
+
+The function `scipy.linalg.clarkson_woodruff_transform` has been added.
+It finds low-rank matrix approximation via the Clarkson-Woodruff Transform.
+
+The functions `scipy.linalg.eigh_tridiagonal` and
+`scipy.linalg.eigvalsh_tridiagonal`, which find the eigenvalues and
+eigenvectors of tridiagonal hermitian/symmetric matrices, were added.
+
+
+`scipy.ndimage` improvements
+----------------------------
+
+Support for homogeneous coordinate transforms has been added to
+`scipy.ndimage.affine_transform`.
+
+The ``ndimage`` C code underwent a significant refactoring, and is now
+a lot easier to understand and maintain.
+
+
+`scipy.optimize` improvements
+-----------------------------
+
+The methods ``trust-region-exact`` and ``trust-krylov`` have been added to
+the
+function `scipy.optimize.minimize`. These new trust-region methods solve the
+subproblem with higher accuracy at the cost of more Hessian factorizations
+(compared to dogleg) or more matrix vector products (compared to ncg) but
+usually require less nonlinear iterations and are able to deal with
+indefinite
+Hessians. They seem very competitive against the other Newton methods
+implemented in scipy.
+
+`scipy.optimize.linprog` gained an interior point method.  Its performance
+is
+superior (both in accuracy and speed) to the older simplex method.
+
+
+`scipy.signal` improvements
+---------------------------
+
+An argument ``fs`` (sampling frequency) was added to the following
+functions:
+``firwin``, ``firwin2``, ``firls``, and ``remez``.  This makes these
+functions
+consistent with many other functions in `scipy.signal` in which the sampling
+frequency can be specified.
+
+`scipy.signal.freqz` has been sped up significantly for FIR filters.
+
+
+`scipy.sparse` improvements
+---------------------------
+
+Iterating over and slicing of CSC and CSR matrices is now faster by up to
+~35%.
+
+The ``tocsr`` method of COO matrices is now several times faster.
+
+The ``diagonal`` method of sparse matrices now takes a parameter, indicating
+which diagonal to return.
+
+
+`scipy.sparse.linalg` improvements
+----------------------------------
+
+A new iterative solver for large-scale nonsymmetric sparse linear systems,
+`scipy.sparse.linalg.gcrotmk`, was added.  It implements ``GCROT(m,k)``, a
+flexible variant of ``GCROT``.
+
+`scipy.sparse.linalg.lsmr` now accepts an initial guess, yielding
+potentially
+faster convergence.
+
+SuperLU was updated to version 5.2.1.
+
+
+`scipy.spatial` improvements
+----------------------------
+
+Many distance metrics in `scipy.spatial.distance` gained support for
+weights.
+
+The signatures of `scipy.spatial.distance.pdist` and
+`scipy.spatial.distance.cdist` were changed to ``*args, **kwargs`` in order
+to
+support a wider range of metrics (e.g. string-based metrics that need extra
+keywords).  Also, an optional ``out`` parameter was added to ``pdist`` and
+``cdist`` allowing the user to specify where the resulting distance matrix
+is
+to be stored
+
+
+`scipy.stats` improvements
+--------------------------
+
+The methods ``cdf`` and ``logcdf`` were added to
+`scipy.stats.multivariate_normal`, providing the cumulative distribution
+function of the multivariate normal distribution.
+
+New statistical distance functions were added, namely
+`scipy.stats.wasserstein_distance` for the first Wasserstein distance and
+`scipy.stats.energy_distance` for the energy distance.
+
+
+Deprecated features
+===================
+
+The following functions in `scipy.misc` are deprecated: ``bytescale``,
+``fromimage``, ``imfilter``, ``imread``, ``imresize``, ``imrotate``,
+``imsave``, ``imshow`` and ``toimage``.  Most of those functions have
+unexpected
+behavior (like rescaling and type casting image data without the user asking
+for that).  Other functions simply have better alternatives.
+
+``scipy.interpolate.interpolate_wrapper`` and all functions in that
+submodule
+are deprecated.  This was a never finished set of wrapper functions which is
+not relevant anymore.
+
+The ``fillvalue`` of `scipy.signal.convolve2d` will be cast directly to the
+dtypes of the input arrays in the future and checked that it is a scalar or
+an array with a single element.
+
+``scipy.spatial.distance.matching`` is deprecated.  It is an alias of
+`scipy.spatial.distance.hamming`, which should be used instead.
+
+Implementation of `scipy.spatial.distance.wminkowski` was based on a wrong
+interpretation of the metric definition. In scipy 1.0 it has been just
+deprecated in the documentation to keep retro-compatibility but is
+recommended
+to use the new version of `scipy.spatial.distance.minkowski` that implements
+the correct behaviour.
+
+Positional arguments of `scipy.spatial.distance.pdist` and
+`scipy.spatial.distance.cdist` should be replaced with their keyword
+version.
+
+
+Backwards incompatible changes
+==============================
+
+The following deprecated functions have been removed from `scipy.stats`:
+``betai``, ``chisqprob``, ``f_value``, ``histogram``, ``histogram2``,
+``pdf_fromgamma``, ``signaltonoise``, ``square_of_sums``, ``ss`` and
+``threshold``.
+
+The following deprecated functions have been removed from
+`scipy.stats.mstats`:
+``betai``, ``f_value_wilks_lambda``, ``signaltonoise`` and ``threshold``.
+
+The deprecated ``a`` and ``reta`` keywords have been removed from
+`scipy.stats.shapiro`.
+
+The deprecated functions ``sparse.csgraph.cs_graph_components`` and
+``sparse.linalg.symeig`` have been removed from `scipy.sparse`.
+
+The following deprecated keywords have been removed in
+`scipy.sparse.linalg`:
+``drop_tol`` from ``splu``, and ``xtype`` from ``bicg``, ``bicgstab``,
+``cg``,
+``cgs``, ``gmres``, ``qmr`` and ``minres``.
+
+The deprecated functions ``expm2`` and ``expm3`` have been removed from
+`scipy.linalg`.  The deprecated keyword ``q`` was removed from
+`scipy.linalg.expm`.  And the deprecated submodule ``linalg.calc_lwork`` was
+removed.
+
+The deprecated functions ``C2K``, ``K2C``, ``F2C``, ``C2F``, ``F2K`` and
+``K2F`` have been removed from `scipy.constants`.
+
+The deprecated ``ppform`` class was removed from `scipy.interpolate`.
+
+The deprecated keyword ``iprint`` was removed from
+`scipy.optimize.fmin_cobyla`.
+
+The default value for the ``zero_phase`` keyword of `scipy.signal.decimate`
+has been changed to True.
+
+The ``kmeans`` and ``kmeans2`` functions in `scipy.cluster.vq` changed the
+method used for random initialization, so using a fixed random seed will
+not necessarily produce the same results as in previous versions.
+
+`scipy.special.gammaln` does not accept complex arguments anymore.
+
+The deprecated functions ``sph_jn``, ``sph_yn``, ``sph_jnyn``, ``sph_in``,
+``sph_kn``, and ``sph_inkn`` have been removed. Users should instead use
+the functions ``spherical_jn``, ``spherical_yn``, ``spherical_in``, and
+``spherical_kn``. Be aware that the new functions have different
+signatures.
+
+The cross-class properties of `scipy.signal.lti` systems have been removed.
+The following properties/setters have been removed:
+
+Name - (accessing/setting has been removed) - (setting has been removed)
+
+* StateSpace - (``num``, ``den``, ``gain``) - (``zeros``, ``poles``)
+* TransferFunction (``A``, ``B``, ``C``, ``D``, ``gain``) - (``zeros``,
+``poles``)
+* ZerosPolesGain (``A``, ``B``, ``C``, ``D``, ``num``, ``den``) - ()
+
+``signal.freqz(b, a)`` with ``b`` or ``a`` >1-D raises a ``ValueError``.
+This
+was a corner case for which it was unclear that the behavior was
+well-defined.
+
+The method ``var`` of `scipy.stats.dirichlet` now returns a scalar rather
+than
+an ndarray when the length of alpha is 1.
+
+
+Other changes
+=============
+
+SciPy now has a formal governance structure.  It consists of a BDFL (Pauli
+Virtanen) and a Steering Committee.  See `the governance document
+<
+https://github.com/scipy/scipy/blob/master/doc/source/dev/governance/governance.rst
+>`_
+for details.
+
+It is now possible to build SciPy on Windows with MSVC + gfortran!
+Continuous
+integration has been set up for this build configuration on Appveyor,
+building
+against OpenBLAS.
+
+Continuous integration for OS X has been set up on TravisCI.
+
+The SciPy test suite has been migrated from ``nose`` to ``pytest``.
+
+``scipy/_distributor_init.py`` was added to allow redistributors of SciPy to
+add custom code that needs to run when importing SciPy (e.g. checks for
+hardware, DLL search paths, etc.).
+
+Support for PEP 518 (specifying build system requirements) was added - see
+``pyproject.toml`` in the root of the SciPy repository.
+
+In order to have consistent function names, the function
+``scipy.linalg.solve_lyapunov`` is renamed to
+`scipy.linalg.solve_continuous_lyapunov`.  The old name is kept for
+backwards-compatibility.
+
+
+Authors
+=======
+
+* @arcady +
+* @xoviat +
+* Anton Akhmerov
+* Dominic Antonacci +
+* Alessandro Pietro Bardelli
+* Ved Basu +
+* Michael James Bedford +
+* Ray Bell +
+* Juan M. Bello-Rivas +
+* Sebastian Berg
+* Felix Berkenkamp
+* Jyotirmoy Bhattacharya +
+* Matthew Brett
+* Jonathan Bright
+* Bruno Jiménez +
+* Evgeni Burovski
+* Patrick Callier
+* Mark Campanelli +
+* CJ Carey
+* Robert Cimrman
+* Adam Cox +
+* Michael Danilov +
+* David Haberthür +
+* Andras Deak +
+* Philip DeBoer
+* Anne-Sylvie Deutsch
+* Cathy Douglass +
+* Dominic Else +
+* Guo Fei +
+* Roman Feldbauer +
+* Yu Feng
+* Jaime Fernandez del Rio
+* Orestis Floros +
+* David Freese +
+* Adam Geitgey +
+* James Gerity +
+* Dezmond Goff +
+* Christoph Gohlke
+* Ralf Gommers
+* Dirk Gorissen +
+* Matt Haberland +
+* David Hagen +
+* Charles Harris
+* Lam Yuen Hei +
+* Jean Helie +
+* Gaute Hope +
+* Guillaume Horel +
+* Franziska Horn +
+* Yevhenii Hyzyla +
+* Vladislav Iakovlev +
+* Marvin Kastner +
+* Mher Kazandjian
+* Thomas Keck
+* Adam Kurkiewicz +
+* Ronan Lamy +
+* J.L. Lanfranchi +
+* Eric Larson
+* Denis Laxalde
+* Gregory R. Lee
+* Felix Lenders +
+* Evan Limanto
+* Julian Lukwata +
+* François Magimel
+* Syrtis Major +
+* Charles Masson +
+* Nikolay Mayorov
+* Tobias Megies
+* Markus Meister +
+* Roman Mirochnik +
+* Jordi Montes +
+* Nathan Musoke +
+* Andrew Nelson
+* M.J. Nichol
+* Juan Nunez-Iglesias
+* Arno Onken +
+* Nick Papior +
+* Dima Pasechnik +
+* Ashwin Pathak +
+* Oleksandr Pavlyk +
+* Stefan Peterson
+* Ilhan Polat
+* Andrey Portnoy +
+* Ravi Kumar Prasad +
+* Aman Pratik
+* Eric Quintero
+* Vedant Rathore +
+* Tyler Reddy
+* Joscha Reimer
+* Philipp Rentzsch +
+* Antonio Horta Ribeiro
+* Ned Richards +
+* Kevin Rose +
+* Benoit Rostykus +
+* Matt Ruffalo +
+* Eli Sadoff +
+* Pim Schellart
+* Nico Schlömer +
+* Klaus Sembritzki +
+* Nikolay Shebanov +
+* Jonathan Tammo Siebert
+* Scott Sievert
+* Max Silbiger +
+* Mandeep Singh +
+* Michael Stewart +
+* Jonathan Sutton +
+* Deep Tavker +
+* Martin Thoma
+* James Tocknell +
+* Aleksandar Trifunovic +
+* Paul van Mulbregt +
+* Jacob Vanderplas
+* Aditya Vijaykumar
+* Pauli Virtanen
+* James Webber
+* Warren Weckesser
+* Eric Wieser +
+* Josh Wilson
+* Zhiqing Xiao +
+* Evgeny Zhurko
+* Nikolay Zinov +
+* Zé Vinícius +
+
+A total of 121 people contributed to this release.
+People with a "+" by their names contributed a patch for the first time.
+This list of names is automatically generated, and may not be fully
+complete.
+
+
+Cheers,
+Ralf
+
+Ralf Gommers ralf.gommers at gmail.com
+Wed Oct 25 06:14:07 EDT 2017
+\end{verbatim}
