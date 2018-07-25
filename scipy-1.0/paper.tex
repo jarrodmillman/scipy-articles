@@ -1,4 +1,6 @@
-\documentclass[fleqn,10pt]{wlscirep}
+%\documentclass[fleqn,10pt]{wlscirep}
+% switch bib style for arxiv
+\documentclass[fleqn,10pt]{scipy}
 
 % Packages
 \usepackage[super]{nth}
@@ -113,7 +115,44 @@ SciPy library and highlight some recent technical developments.
 
 \textit{The Introduction section expands on the background of the work (some overlap with the Abstract is acceptable). The introduction should not include subheadings.}
 
+\section*{Background}
+
 \textbf{History}
+
+\cite{dubois2007guest}
+\cite{oliphant2007python}
+\cite{perez2007ipython}
+\cite{hunter2007matplotlib}
+\cite{vanderwalt2008scipy}
+\cite{peterson2009f2py}
+\cite{millman2011python}
+\cite{perez2011python}
+\cite{vanderwalt2011numpy}
+\cite{behnel2011cython}
+\cite{pedregosa2011scikit}
+\cite{vanderwalt2014scikit}
+\cite{millman2014developing}
+\cite{meurer2017sympy}
+
+\begin{figure}
+\begin{verbatim}
+    2001: first SciPy release
+    2005: transition to NumPy
+    2007: creation of scikits
+    2008: spatial module and first Cython code added
+    2010: move to a 6-monthly release cycle
+    2011: development moves to GitHub
+    2011: Python 3 support
+    2012: add a sparse graph module and unified optimization interface
+    2012: remove of maxentropy
+    2013: continuous integration with TravisCI
+    2015: adding Cython interface for BLAS/LAPACK and a benchmark suite
+    2017: add a unified C API with LowLevelCallable; remove weave
+    2017: SciPy 1.0 release
+\end{verbatim}
+\caption{Timeline}
+\end{figure}
+
 
 \textbf{Project goals and scope}
 
@@ -468,7 +507,7 @@ of the SciPy manylinux wheels between the start of 2016 and May of 2018
 (njs blog). The recommended source for citing SciPy is simply a reference
 to the website / library itself\cite{SciPylib}, and has been cited $>3000$
 times. Some of the most prominent citing articles include the IPython
-publication\cite{PER-GRA:2007}, a heavily-cited Nature Biotechnology
+publication\cite{perez2007ipython}, a heavily-cited Nature Biotechnology
 article\cite{pmid17287757}, a dark
 matter annihilitation study in the field of
 cosmology\cite{1475-7516-2012-08-007}, and many of the
@@ -480,8 +519,6 @@ computing stack.
 
 
 \bibliography{references}
-
-\noindent Use the cite command for an inline citation, e.g. \cite{behnel2011cython}.
 
 \section*{Acknowledgements (not compulsory)}
 
